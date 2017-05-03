@@ -1,8 +1,8 @@
-FROM golang:latest
+FROM apicht/rpi-golang:latest
 
 WORKDIR $GOPATH/src/github.com/zachlatta/sshtron
 
-RUN apt-get update && apt-get install openssh-client
+RUN apt-get update && apt-get install openssh-client make
 
 ADD . .
 RUN make

@@ -23,12 +23,8 @@ If the color you picked is already taken in all open games, you'll randomly be a
 Clone the project and `cd` into its directory. These instructions assume that you have your `GOPATH` setup correctly.
 
 ```sh
-# Create an RSA public/private keypair in the current directory for the server
-# to use. Don't give it a passphrase.
-$ ssh-keygen -t rsa -f id_rsa
-
-# Download dependencies and compile the project
-$ go get && go build
+# Build SSHTron
+$ make clean && make
 
 # Run it! You can set PORT to customize the HTTP port it serves on and SSH_PORT
 # to customize the SSH port it serves on.
@@ -40,14 +36,21 @@ $ ./sshtron
 Clone the project and `cd` into its directory.
 
 ```sh
-# Build the SSHTron Docker image
-$ docker build -t sshtron .
+# Build the SSHTron Docker image, tagged as sshtron:latest
+$ make image
 
 # Spin up the container with always-restart policy
 $ docker run -t -d -p 2022:2022 --restart always --name sshtron sshtron
 ```
 
-For Raspberry Pi, change the base image in `Dockerfile` from `golang:latest` to `apicht/rpi-golang:latest`.
+For Raspberry Pi:
+```sh
+# Build the SSHTron Docker image, tagged as sshtron:rpi
+$ make image-rpi
+
+# Spin up the container with always-restart policy
+$ docker run -t -d -p 2022:2022 --restart always --name sshtron sshtron:rpi
+```
 
 ## CVE-2016-0777
 
